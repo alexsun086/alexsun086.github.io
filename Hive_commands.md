@@ -1,3 +1,4 @@
+### Database
 ```
 CREATE (DATABASE) [IF NOT EXISTS] database_name
 
@@ -26,6 +27,8 @@ ALTER (DATABASE) database_name SET OWNER [USER|ROLE] user_or_role;
 ```
 Show databases;
 ```
+
+### Table
 ```
 CREATE  TABLE [IF NOT EXISTS] [db_name.]table_name    --
 
@@ -96,6 +99,7 @@ describe extended college.college_students name;
 show tables;
 ```
 
+### Load data
 ```
 LOAD DATA [LOCAL] INPATH 'hdfsfilepath/localfilepath' [OVERWRITE] INTO TABLE existing_table_name
 
@@ -129,3 +133,4 @@ select cus.custno,cus.firstname,cus.lastname,cus.age,cus.profession;
 //INSERT OVERWRITE is used to overwrite the existing data in the table or partition.
 //INSERT INTO is used to append the data into existing data in a table.
 ```
+

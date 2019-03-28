@@ -11,24 +11,30 @@ SingleObject class provides a static method to get its static instance to outsid
 1. Create a Singleton Class.
 
 SingleObject.java
+
+Volatile is a must:
+1. Allocate uniqueInstance space
+2. Initialize uniqueInstance
+3. Point uniqueInstance to allocated address
+
+JVM instruction rearrangement
 ```
 public class SingleObject {
+    private volatile static Singleton uniqueInstance;
+    private Singleton() {
+    }
 
-   //create an object of SingleObject
-   private static SingleObject instance = new SingleObject();
-
-   //make the constructor private so that this class cannot be
-   //instantiated
-   private SingleObject(){}
-
-   //Get the only object available
-   public static SingleObject getInstance(){
-      return instance;
-   }
-
-   public void showMessage(){
-      System.out.println("Hello World!");
-   }
+    public static Singleton getUniqueInstance() {
+        if (uniqueInstance == null) {
+            //类对象加锁
+            synchronized (Singleton.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new Singleton();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
 }
 ```
 2. Get the only object from the singleton class.
